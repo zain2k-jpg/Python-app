@@ -1,17 +1,6 @@
-FROM python:3.10.13-alpine
-
-LABEL name="Python Application" \   
-    maintainer="Ali Kahoot <kahoot.ali@outlook.com>" \
-    summary="A Sample Python application"
-
-WORKDIR /app
-
-COPY requirements.txt .
-
-RUN pip install -r 'requirements.txt'
-
-EXPOSE 8080
-
-COPY . ./
-
-CMD [ "python", "./app.py" ]
+FROM python:3.9.18-slim-bullseye
+WORKDIR /python-app
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+COPY . .
+CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
